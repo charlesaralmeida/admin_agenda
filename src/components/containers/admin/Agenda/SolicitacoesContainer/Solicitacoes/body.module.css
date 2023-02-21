@@ -1,0 +1,9 @@
+.body {
+    width: 100%;
+    height: 1105px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Roboto';
+    font-size: smaller;
+}

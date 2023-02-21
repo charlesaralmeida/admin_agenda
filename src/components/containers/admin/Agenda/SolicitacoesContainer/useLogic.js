@@ -5,13 +5,13 @@ import styles from './.module.css'
 import { ICONS, COLORS } from '../../../../../utils/constants'
 import ButtonWithIcon from '../../../../buttons/ButtonWithIcon'
 import usePrinter from '../../../../printer'
-import ButtonBackNavigation from '../../../../buttons/ButtonBackNavigation'
+import Solicitacoes from './Solicitacoes/Solicitacoes'
 
 const useLogic = () => {
     const [frota, setFrota] = useState([])
     const [motorista, setMotorista] = useState([])
     const { handlePrint, buildDocumentToPrint } = usePrinter()
-    const DocumentToPrint = buildDocumentToPrint(<ButtonBackNavigation />)
+    const DocumentToPrint = buildDocumentToPrint(<Solicitacoes />)
 
     const handleChange = (field, key, value) => {
         let aux = []

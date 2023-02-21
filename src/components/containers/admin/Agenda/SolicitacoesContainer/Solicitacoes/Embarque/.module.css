@@ -1,0 +1,80 @@
+@import '../body.module.css';
+
+.container {
+    margin-top: 2%;
+    width: 98%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid red;
+}
+
+.header {
+    display: flex;
+    color: white;
+    font-weight: bold;
+    background-color: rgb(34, 34, 34);
+    padding-left: 2%;
+    width: 100%;
+}
+
+.line_1,
+.line_2 {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    font-size: large;
+}
+
+.line_1 > .field1 {
+    display: flex;
+    align-items: center;
+    width: 50%;
+}
+
+.line_1 > .field2 {
+    display: flex;
+    align-items: center;
+    width: 50%;
+}
+
+.line_2 > .field1 {
+    display: flex;
+    align-items: center;
+    width: 30%;
+}
+
+.line_2 > .field2 {
+    display: flex;
+    align-items: center;
+    width: 30%;
+}
+
+.line_2 > .field3 {
+    display: flex;
+    align-items: center;
+    width: 30%;
+}
+
+.columns {
+    display: flex;
+    width: 100%;
+}
+
+.column_1 {
+    display: flex;
+    flex-direction: column;
+    width: 98%;
+    border: 1px solid black;
+}
+
+.column_1 > .field {
+    display: flex;
+    align-items: center;
+}
+
+.info {
+    font-weight: bold;
+    padding: 2%;
+}

@@ -1,0 +1,26 @@
+@import '../body.module.css';
+
+.container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 2%;
+}
+
+.content {
+    width: 60%;
+    margin-right: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: large;
+}
+
+.logo_dga {
+    width: 20%;
+}
+
+.logo_unicamp {
+    width: 17%;
+}
