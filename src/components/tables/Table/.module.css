@@ -1,0 +1,12 @@
+.table {
+    font-family: 'Roboto';
+    border-collapse: collapse;
+    width: auto;
+}
+
+select {
+    font-size: larger;
+    border-radius: 5px;
+    width: 70%;
+    text-align: center;
+}

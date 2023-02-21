@@ -1,0 +1,17 @@
+@import '../../../style.css';
+
+.head {
+    width: 100%;
+}
+
+.row {
+    width: 100%;
+}
+
+.data {
+    background-color: var(--PRIMARY_COLOR);
+    border: 1px solid var(--THIN_BORDER);
+    padding: 1%;
+    color: white;
+    font-size: smaller;
+}

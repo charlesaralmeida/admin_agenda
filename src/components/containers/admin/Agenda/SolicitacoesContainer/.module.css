@@ -1,0 +1,43 @@
+@import '../../../../../style.css';
+
+.wrapper {
+    height: 95%;
+    width: 98%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: 'Roboto';
+}
+
+.container {
+    max-height: 90%;
+    width: 98%;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+.numsolicitacao {
+    text-decoration: underline;
+    color: blue;
+    cursor: pointer;
+}
+
+.frota {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 70px;
+    border: 1px solid black;
+}
+
+.quantidade {
+    text-align: right;
+    width: 95%;
+    font-weight: bold;
+}
+
+.zeroquantidade {
+    text-align: center;
+    font-weight: bold;
+}

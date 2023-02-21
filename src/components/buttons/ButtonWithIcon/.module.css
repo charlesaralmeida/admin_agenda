@@ -1,0 +1,18 @@
+.buttonWithIcon {
+    border: 1px solid white;
+    border-radius: 3px;
+    box-shadow: 2px 2px rgb(101, 100, 100);
+}
+
+.buttonWithIcon:hover {
+    cursor: pointer;
+}
+
+.buttonWithIcon:active {
+    border: 1px solid;
+    box-shadow: none;
+}
+
+.icon {
+    width: 30%;
+}

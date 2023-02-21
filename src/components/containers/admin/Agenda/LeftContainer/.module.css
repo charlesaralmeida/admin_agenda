@@ -1,0 +1,14 @@
+@import '../../../../../style.css';
+
+:root {
+    --LEFT_CONTAINER_WIDTH: 23%;
+}
+
+.container {
+    width: var(--LEFT_CONTAINER_WIDTH);
+    height: 100%;
+    border-collapse: collapse;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

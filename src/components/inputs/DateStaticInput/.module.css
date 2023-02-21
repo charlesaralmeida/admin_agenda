@@ -1,0 +1,17 @@
+@import '../../../style.css';
+
+.date_input {
+    width: 100%;
+}
+
+.red {
+    color: var(--RED);
+    font-weight: bolder;
+    font-size: large;
+}
+
+.green {
+    color: var(--PRIMARY_COLOR);
+    font-weight: bolder;
+    font-size: large;
+}

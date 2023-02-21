@@ -1,0 +1,10 @@
+@import '../../../../../style.css';
+@import '../LeftContainer/.module.css';
+
+.container {
+    width: calc(100% - var(--LEFT_CONTAINER_WIDTH));
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
