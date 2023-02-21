@@ -28,33 +28,18 @@ const Embarque = () => (
             </div>
         </div>
         <div className={styles.columns}>
-            <div className={styles.column_1}>
-                <div className={styles.field}>
-                    Passageiro (1):
-                    <div className={styles.info}>
-                        FREDERICO JOSé BELTRAMELLY
-                    </div>
-                </div>
-                <div className={styles.field}>
-                    Local/Apresentação:
-                    <div className={styles.info}>ALMOXARIFADO/HEMOCENTRO</div>
-                </div>
-                <div className={styles.field}>
-                    Endereço:
-                    <div className={styles.info}>RUA CARLOS CHAGAS, 480</div>
-                </div>
-                <div className={styles.field}>
-                    Município:
-                    <div className={styles.info}>CAMPINAS</div>
-                </div>
-                <div className={styles.field}>
-                    E-mail:
-                    <div className={styles.info}>fjbeltra@unicamp.br</div>
-                </div>
-                <div className={styles.field}>
-                    Telefone:
-                    <div className={styles.info}>(19) 3521-8694</div>
-                </div>
+            <div className={styles.field}>
+                Local/Apresentação:
+                <div className={styles.info}>ALMOXARIFADO/HEMOCENTRO</div>
+            </div>
+            <div className={styles.field}>
+                Endereço:
+                <div className={styles.info}>RUA CARLOS CHAGAS, 480</div>
+            </div>
+            <div className={styles.field}>
+                Município:
+                <div className={styles.info}>CAMPINAS</div>/
+                <div className={styles.info}>SP</div>
             </div>
         </div>
     </div>

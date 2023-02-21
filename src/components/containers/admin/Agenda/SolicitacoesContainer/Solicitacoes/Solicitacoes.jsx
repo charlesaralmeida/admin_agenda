@@ -4,6 +4,7 @@ import styles from './body.module.css'
 import Identificacao from './Identificacao'
 import Header from './Header'
 import Embarque from './Embarque'
+import Intermediarios from './Intermediarios'
 
 const Solicitacoes = () => {
     //     const [container, setContainer] = useState(null)
@@ -34,6 +35,7 @@ const Solicitacoes = () => {
             <Header />
             <Identificacao />
             <Embarque />
+            <Intermediarios />
         </div>
     )
 }
