@@ -17,7 +17,7 @@ const SolicitacoesContainer = () => {
                 <p className={styles.quantidade}>{rows.length} solicitação</p>
             ) : (
                 <p className={styles.zeroquantidade}>
-                    Nenhuma solicitação nesta data
+                    Nenhuma solicitação nesta data!#
                 </p>
             )}
             {DocumentToPrint}
