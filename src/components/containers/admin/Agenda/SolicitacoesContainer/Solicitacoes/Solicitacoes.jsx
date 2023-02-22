@@ -5,6 +5,10 @@ import Identificacao from './Identificacao'
 import Header from './Header'
 import Embarque from './Embarque'
 import Intermediarios from './Intermediarios'
+import Final from './Final'
+import Motorista from './Motorista'
+
+import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer'
 
 const Solicitacoes = () => {
     //     const [container, setContainer] = useState(null)
@@ -30,14 +34,39 @@ const Solicitacoes = () => {
     //     }, [container])
 
     //     return container && createPortal(<OSHeader />, container)
+
+    const styles = StyleSheet.create({
+        page: {
+            flexDirection: 'row',
+            backgroundColor: 'white',
+        },
+        section: {
+            margin: 10,
+            padding: 10,
+            flexGrow: 1,
+        },
+    })
+
     return (
-        <div className={styles.body}>
-            <Header />
-            <Identificacao />
-            <Embarque />
-            <Intermediarios />
-        </div>
+        <Document>
+            <Page size="A4" style={styles.page}>
+                <View>
+                    <Text>Section #1</Text>
+                </View>
+            </Page>
+        </Document>
     )
+
+    // return (
+    //     <div className={styles.body}>
+    //         <Header />
+    //         <Identificacao />
+    //         <Embarque />
+    //         <Intermediarios />
+    //         <Final />
+    //         <Motorista />
+    //     </div>
+    // )
 }
 
 export default Solicitacoes

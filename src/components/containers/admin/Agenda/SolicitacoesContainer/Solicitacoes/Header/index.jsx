@@ -4,15 +4,9 @@ import styles from './.module.css'
 
 const Header = () => (
     <div className={styles.container}>
-        <div className={styles.content}>
-            <img alt="logo" className={styles.logo_dga} src={logo_dga} />
-            Diretoria Geral de Administração
-            <img
-                alt="logo"
-                className={styles.logo_unicamp}
-                src={logo_unicamp}
-            />
-        </div>
+        <img alt="logo" className={styles.logo_dga} src={logo_dga} />
+        Formulário de Execução de Serviços
+        <img alt="logo" className={styles.logo_unicamp} src={logo_unicamp} />
     </div>
 )
 
