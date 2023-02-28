@@ -35,38 +35,38 @@ const Solicitacoes = () => {
 
     //     return container && createPortal(<OSHeader />, container)
 
-    const styles = StyleSheet.create({
-        page: {
-            flexDirection: 'row',
-            backgroundColor: 'white',
-        },
-        section: {
-            margin: 10,
-            padding: 10,
-            flexGrow: 1,
-        },
-    })
-
-    return (
-        <Document>
-            <Page size="A4" style={styles.page}>
-                <View>
-                    <Text>Section #1</Text>
-                </View>
-            </Page>
-        </Document>
-    )
+    // const styles = StyleSheet.create({
+    //     page: {
+    //         flexDirection: 'row',
+    //         backgroundColor: 'white',
+    //     },
+    //     section: {
+    //         margin: 10,
+    //         padding: 10,
+    //         flexGrow: 1,
+    //     },
+    // })
 
     // return (
-    //     <div className={styles.body}>
-    //         <Header />
-    //         <Identificacao />
-    //         <Embarque />
-    //         <Intermediarios />
-    //         <Final />
-    //         <Motorista />
-    //     </div>
+    //     <Document>
+    //         <Page size="A4" style={styles.page}>
+    //             <View>
+    //                 <Text>Section #1</Text>
+    //             </View>
+    //         </Page>
+    //     </Document>
     // )
+
+    return (
+        <div className={styles.body}>
+            <Header />
+            <Identificacao />
+            <Embarque />
+            <Intermediarios />
+            <Final />
+            <Motorista />
+        </div>
+    )
 }
 
 export default Solicitacoes

@@ -7,8 +7,8 @@ import { PDFViewer } from '@react-pdf/renderer'
 import ReactPDF from '@react-pdf/renderer'
 
 const SolicitacoesContainer = () => {
-    // const { headers, rows, DocumentToPrint } = useLogic()
-    const { headers, rows } = useLogic()
+    const { headers, rows, DocumentToPrint } = useLogic()
+    // const { headers, rows } = useLogic()
 
     return (
         <div className={styles.wrapper}>
@@ -25,11 +25,10 @@ const SolicitacoesContainer = () => {
                     Nenhuma solicitação nesta data
                 </p>
             )}
-            {/* {DocumentToPrint} */}
+            {DocumentToPrint}
             {/* <PDFViewer>
                 <Solicitacoes />
             </PDFViewer> */}
-            {ReactPDF.render(<Solicitacoes />, `${__dirname}/example.pdf`)}
         </div>
     )
 }

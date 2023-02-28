@@ -11,12 +11,12 @@ import ReactPDF from '@react-pdf/renderer'
 const useLogic = () => {
     const [frota, setFrota] = useState([])
     const [motorista, setMotorista] = useState([])
-    // const { handlePrint, buildDocumentToPrint } = usePrinter()
-    // const DocumentToPrint = buildDocumentToPrint(<Solicitacoes />)
+    const { handlePrint, buildDocumentToPrint } = usePrinter()
+    const DocumentToPrint = buildDocumentToPrint(<Solicitacoes />)
 
-    const handlePrint = () => {
-        ReactPDF.render(<Solicitacoes />, `${__dirname}/example.pdf`)
-    }
+    // const handlePrint = () => {
+    //     ReactPDF.render(<Solicitacoes />, `${__dirname}/example.pdf`)
+    // }
 
     const handleChange = (field, key, value) => {
         let aux = []
@@ -99,8 +99,8 @@ const useLogic = () => {
 
     const rows = createData()
 
-    // return { headers, rows, DocumentToPrint }
-    return { headers, rows }
+    return { headers, rows, DocumentToPrint }
+    // return { headers, rows }
 }
 
 export default useLogic
