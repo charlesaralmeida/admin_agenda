@@ -1,22 +1,15 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import FrotaSelect from '../../../../selects/FrotaSelect'
 import MotoristaSelect from '../../../../selects/MotoristaSelect'
 import styles from './.module.css'
 import { ICONS, COLORS } from '../../../../../utils/constants'
 import ButtonWithIcon from '../../../../buttons/ButtonWithIcon'
-import usePrinter from '../../../../printer'
-import Solicitacoes from './Solicitacoes/Solicitacoes'
-import ReactPDF from '@react-pdf/renderer'
+import { openPdfNewWindow } from 'components/pdf/pdfMake'
 
 const useLogic = () => {
     const [frota, setFrota] = useState([])
     const [motorista, setMotorista] = useState([])
-    const { handlePrint, buildDocumentToPrint } = usePrinter()
-    const DocumentToPrint = buildDocumentToPrint(<Solicitacoes />)
-
-    // const handlePrint = () => {
-    //     ReactPDF.render(<Solicitacoes />, `${__dirname}/example.pdf`)
-    // }
+    const handlePrint = openPdfNewWindow
 
     const handleChange = (field, key, value) => {
         let aux = []
@@ -99,8 +92,7 @@ const useLogic = () => {
 
     const rows = createData()
 
-    return { headers, rows, DocumentToPrint }
-    // return { headers, rows }
+    return { headers, rows }
 }
 
 export default useLogic
