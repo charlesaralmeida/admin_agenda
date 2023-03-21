@@ -39,30 +39,74 @@ const useLogic = () => {
         'Motorista',
     ]
 
-    const data = []
+    const dados = [
+        {
+            horario_saida: '8:00',
+            horario_retorno: '15:00',
+            num_solicitacao: '1045/2023',
+            unidade: 'Hemocentro',
+            embarque: 'Rua Dr. Antonio Augusto de Almeida, 530 - Campinas/SP',
+            destino: 'Rua Dr. Antonio Augusto de Almeida, 530 - Campinas/SP',
+        },
+        {
+            horario_saida: '8:00',
+            horario_retorno: '15:00',
+            num_solicitacao: '1045/2023',
+            unidade: 'Hemocentro',
+            embarque: 'Rua Dr. Antonio Augusto de Almeida, 530 - Campinas/SP',
+            destino: 'Rua Dr. Antonio Augusto de Almeida, 530 - Campinas/SP',
+        },
+        {
+            horario_saida: '8:00',
+            horario_retorno: '15:00',
+            num_solicitacao: '1045/2023',
+            unidade: 'Hemocentro',
+            embarque: 'Rua Dr. Antonio Augusto de Almeida, 530 - Campinas/SP',
+            destino: 'Rua Dr. Antonio Augusto de Almeida, 530 - Campinas/SP',
+        },
+        {
+            horario_saida: '8:00',
+            horario_retorno: '15:00',
+            num_solicitacao: '1045/2023',
+            unidade: 'Hemocentro',
+            embarque: 'Rua Dr. Antonio Augusto de Almeida, 530 - Campinas/SP',
+            destino: 'Rua Dr. Antonio Augusto de Almeida, 530 - Campinas/SP',
+        },
+        {
+            horario_saida: '8:00',
+            horario_retorno: '15:00',
+            num_solicitacao: '1045/2023',
+            unidade: 'Hemocentro',
+            embarque: 'Rua Dr. Antonio Augusto de Almeida, 530 - Campinas/SP',
+            destino: 'Rua Dr. Antonio Augusto de Almeida, 530 - Campinas/SP',
+        },
+    ]
 
-    const createData = () => {
+    const createData = (dados) => {
+        const data = []
         let aux = []
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < dados.length; i++) {
             aux[i] = []
             aux[i].push(<input type="checkbox" />)
             aux[i].push(
                 <>
-                    <p>8:00</p>
-                    <p>15:00</p>
+                    <p>{dados[i].horario_saida}</p>
+                    <p>{dados[i].horario_retorno}</p>
                 </>
             )
-            aux[i].push(<div className={styles.numsolicitacao}>1045/2023</div>)
-            aux[i].push('Hemocentro')
+            aux[i].push(
+                <div className={styles.numsolicitacao}>
+                    {dados[i].num_solicitacao}
+                </div>
+            )
+            aux[i].push(dados[i].unidade)
             aux[i].push(
                 <>
                     <p>
-                        <u>Embarque:</u> Rua Dr. Antonio Augusto de Almeida, 530
-                        - Campinas/SP
+                        <u>Embarque:</u> {dados[i].embarque}
                     </p>
                     <p>
-                        <u>Destino:</u> Rua Dr. Antonio Augusto de Almeida, 530
-                        - Campinas/SP
+                        <u>Destino:</u> {dados[i].destino}
                     </p>
                 </>
             )
@@ -90,7 +134,10 @@ const useLogic = () => {
         return data
     }
 
-    const rows = createData()
+    const rows = createData(dados)
+
+    console.log(headers)
+    console.log(rows)
 
     return { headers, rows }
 }

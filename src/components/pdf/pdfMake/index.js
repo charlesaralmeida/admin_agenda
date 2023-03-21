@@ -14,5 +14,5 @@ pdfMake.fonts = {
 }
 
 export const openPdfNewWindow = () => {
-    pdfMake.createPdf(docDefinition).open()
+    pdfMake.createPdf(docDefinition).download('Agenda_Transportes')
 }

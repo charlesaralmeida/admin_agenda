@@ -3,4 +3,6 @@ import { dados } from './dados'
 
 const faixaAdicionais = faixa('INFORMAÇÕES ADICIONAIS')
 
-export const Adicionais = [faixaAdicionais, dados]
+export const Adicionais = [
+    { stack: [faixaAdicionais, dados], unbreakable: true },
+]
