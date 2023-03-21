@@ -1,6 +1,6 @@
 const fsize = 9
 
-const info = () => {
+const buildInfo = (info) => {
     return {
         stack: [
             {
@@ -14,7 +14,7 @@ const info = () => {
                                 text: 'Passageiro:',
                             },
                             {
-                                text: 'FREDERICO JOSé BELTRAMELLY',
+                                text: info.passageiro.nome,
                                 bold: true,
                             },
                         ],
@@ -23,7 +23,7 @@ const info = () => {
                                 text: 'Telefone:',
                             },
                             {
-                                text: '(19) 3521-8694',
+                                text: info.passageiro.telefone,
                                 bold: true,
                             },
                         ],
@@ -32,7 +32,7 @@ const info = () => {
                                 text: 'Local/Referência:',
                             },
                             {
-                                text: 'ALMOXARIFADO/HEMOCENTRO',
+                                text: info.referencia,
                                 bold: true,
                             },
                         ],
@@ -41,7 +41,7 @@ const info = () => {
                                 text: 'Endereço:',
                             },
                             {
-                                text: 'RUA CARLOS CHAGAS, 480 - UNICAMP - CAMPINAS/SP',
+                                text: info.endereco,
                                 bold: true,
                             },
                         ],
@@ -54,12 +54,10 @@ const info = () => {
     }
 }
 
-const getInfo = () => {
+const getInfo = (detalhes) => {
     let aux = []
-    for (let i = 0; i < 5; i++) {
-        aux.push(info())
-    }
+    detalhes.intermediarios.forEach((element) => aux.push(buildInfo(element)))
     return aux
 }
 
-export const dados = [...getInfo()]
+export const dados = (detalhes) => [...getInfo(detalhes)]

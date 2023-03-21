@@ -3,4 +3,6 @@ import { dados } from './dados'
 
 const faixaFinal = faixa('DESTINO FINAL')
 
-export const Final = [{ stack: [faixaFinal, dados], unbreakable: true }]
+export const Final = (detalhes) => [
+    { stack: [faixaFinal, dados(detalhes)], unbreakable: true },
+]

@@ -3,4 +3,6 @@ import { dados } from './dados'
 
 const faixaMotorista = faixa('VEÍCULO/MOTORISTA')
 
-export const Motorista = [{ stack: [faixaMotorista, dados], unbreakable: true }]
+export const Motorista = (detalhes) => [
+    { stack: [faixaMotorista, dados(detalhes)], unbreakable: true },
+]

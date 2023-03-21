@@ -1,6 +1,6 @@
 import styles from './.module.css'
 
-const MotoristaSelect = ({ handleChange, keyValue, state, index }) => {
+const MotoristaSelect = ({ handleChange, keyValue, state, index, list }) => {
     return (
         <select
             value={state}
@@ -10,9 +10,11 @@ const MotoristaSelect = ({ handleChange, keyValue, state, index }) => {
             className={styles.select}
         >
             <option value=""></option>
-            <option value="Claudio">Claudio Cabreuva da Silva</option>
-            <option value="Alberto">Alberto</option>
-            <option value="Silas">Silas</option>
+            {list.map((motorista, index) => (
+                <option value={index} key={index}>
+                    {motorista}
+                </option>
+            ))}
         </select>
     )
 }

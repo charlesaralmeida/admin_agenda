@@ -1,6 +1,6 @@
 import styles from './.module.css'
 
-const FrotaSelect = ({ handleChange, keyValue, state, index }) => {
+const FrotaSelect = ({ handleChange, keyValue, state, index, list }) => {
     return (
         <select
             value={state}
@@ -10,9 +10,11 @@ const FrotaSelect = ({ handleChange, keyValue, state, index }) => {
             className={styles.select}
         >
             <option value=""></option>
-            <option value="617">C617</option>
-            <option value="618">C18</option>
-            <option value="619">C619</option>
+            {list.map((frota, index) => (
+                <option value={index} key={index}>
+                    {frota}
+                </option>
+            ))}
         </select>
     )
 }

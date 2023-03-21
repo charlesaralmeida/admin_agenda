@@ -1,41 +1,46 @@
 const fsize = 9
 
-const info = {
-    margin: [5, 5],
-    fontSize: fsize,
-    table: {
-        widths: ['15%', '83%'],
-        body: [
-            [
-                {
-                    text: 'Vôo:',
-                },
-                {
-                    text: '7347 - Horário: 9:30',
-                    bold: true,
-                },
+const info = (adicionais) => {
+    return {
+        margin: [5, 5],
+        fontSize: fsize,
+        table: {
+            widths: ['15%', '83%'],
+            body: [
+                [
+                    {
+                        text: 'Vôo:',
+                    },
+                    {
+                        text:
+                            adicionais.voo.numero +
+                            ' - Horário: ' +
+                            adicionais.voo.horario,
+                        bold: true,
+                    },
+                ],
+                [
+                    {
+                        text: 'Informações Adicionais:',
+                    },
+                    {
+                        text: adicionais.informacoes,
+                        bold: true,
+                    },
+                ],
+                [
+                    {
+                        text: 'Finalidade:',
+                    },
+                    {
+                        text: adicionais.finalidade,
+                        bold: true,
+                    },
+                ],
             ],
-            [
-                {
-                    text: 'Informações Adicionais:',
-                },
-                {
-                    text: 'levar suprimentos do hemocentro para o hospital m. gatti',
-                    bold: true,
-                },
-            ],
-            [
-                {
-                    text: 'Finalidade:',
-                },
-                {
-                    text: 'levar suprimentos do hemocentro para o hospital m. gatti',
-                    bold: true,
-                },
-            ],
-        ],
-    },
-    layout: 'noBorders',
+        },
+        layout: 'noBorders',
+    }
 }
 
-export const dados = [info]
+export const dados = (detalhes) => [info(detalhes.adicionais)]

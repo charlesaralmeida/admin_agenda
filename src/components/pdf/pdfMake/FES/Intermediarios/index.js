@@ -3,4 +3,7 @@ import { dados } from './dados'
 
 const faixaIntermediarios = faixa('DESTINO(S) INTERMEDIÁRIO(S)')
 
-export const Intermediarios = [faixaIntermediarios, dados]
+export const Intermediarios = (detalhes) => [
+    faixaIntermediarios,
+    dados(detalhes),
+]

@@ -13,6 +13,11 @@ pdfMake.fonts = {
     },
 }
 
-export const openPdfNewWindow = () => {
-    pdfMake.createPdf(docDefinition).download('Agenda_Transportes')
+export const savePdf = (dados) => {
+    pdfMake.createPdf(docDefinition(dados)).download('Agenda_Transportes')
+}
+
+export const openPdfNewWindow = (dados) => {
+    let win = window.open('', '_blank')
+    pdfMake.createPdf(docDefinition(dados)).open({}, win)
 }

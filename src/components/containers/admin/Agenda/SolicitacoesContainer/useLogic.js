@@ -1,18 +1,36 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import FrotaSelect from '../../../../selects/FrotaSelect'
 import MotoristaSelect from '../../../../selects/MotoristaSelect'
 import styles from './.module.css'
 import { ICONS, COLORS } from '../../../../../utils/constants'
 import ButtonWithIcon from '../../../../buttons/ButtonWithIcon'
-import { openPdfNewWindow } from 'components/pdf/pdfMake'
+import { dados, lista_motoristas, lista_veiculos } from './mockdata'
+import { savePdf, openPdfNewWindow } from 'components/pdf/pdfMake'
 
 const useLogic = () => {
+    const getDados = () => {
+        return dados
+    }
+
+    const [checkbox, setCheckbox] = useState(() => getDados().map(() => false))
+
     const [frota, setFrota] = useState([])
     const [motorista, setMotorista] = useState([])
-    const handlePrint = openPdfNewWindow
+
+    const handlePrint = () => {
+        let dados = getDados().filter((dado, index) => checkbox[index])
+        if (dados.length) openPdfNewWindow(dados[0])
+    }
 
     const handleChange = (field, key, value) => {
         let aux = []
+
+        if (field === 'checkbox') {
+            aux = checkbox
+            aux[key] = value
+            setCheckbox(aux)
+        }
+
         if (field === 'frota') {
             aux = frota
             aux[key] = value
@@ -39,59 +57,31 @@ const useLogic = () => {
         'Motorista',
     ]
 
-    const dados = [
-        {
-            horario_saida: '8:00',
-            horario_retorno: '15:00',
-            num_solicitacao: '1045/2023',
-            unidade: 'Hemocentro',
-            embarque: 'Rua Dr. Antonio Augusto de Almeida, 530 - Campinas/SP',
-            destino: 'Rua Dr. Antonio Augusto de Almeida, 530 - Campinas/SP',
-        },
-        {
-            horario_saida: '8:00',
-            horario_retorno: '15:00',
-            num_solicitacao: '1045/2023',
-            unidade: 'Hemocentro',
-            embarque: 'Rua Dr. Antonio Augusto de Almeida, 530 - Campinas/SP',
-            destino: 'Rua Dr. Antonio Augusto de Almeida, 530 - Campinas/SP',
-        },
-        {
-            horario_saida: '8:00',
-            horario_retorno: '15:00',
-            num_solicitacao: '1045/2023',
-            unidade: 'Hemocentro',
-            embarque: 'Rua Dr. Antonio Augusto de Almeida, 530 - Campinas/SP',
-            destino: 'Rua Dr. Antonio Augusto de Almeida, 530 - Campinas/SP',
-        },
-        {
-            horario_saida: '8:00',
-            horario_retorno: '15:00',
-            num_solicitacao: '1045/2023',
-            unidade: 'Hemocentro',
-            embarque: 'Rua Dr. Antonio Augusto de Almeida, 530 - Campinas/SP',
-            destino: 'Rua Dr. Antonio Augusto de Almeida, 530 - Campinas/SP',
-        },
-        {
-            horario_saida: '8:00',
-            horario_retorno: '15:00',
-            num_solicitacao: '1045/2023',
-            unidade: 'Hemocentro',
-            embarque: 'Rua Dr. Antonio Augusto de Almeida, 530 - Campinas/SP',
-            destino: 'Rua Dr. Antonio Augusto de Almeida, 530 - Campinas/SP',
-        },
-    ]
+    const getListaMotoristas = () => {
+        return lista_motoristas
+    }
+
+    const getListaVeiculos = () => {
+        return lista_veiculos
+    }
 
     const createData = (dados) => {
         const data = []
         let aux = []
         for (let i = 0; i < dados.length; i++) {
             aux[i] = []
-            aux[i].push(<input type="checkbox" />)
+            aux[i].push(
+                <input
+                    type="checkbox"
+                    onChange={(event) =>
+                        handleChange('checkbox', i, event.target.checked)
+                    }
+                />
+            )
             aux[i].push(
                 <>
-                    <p>{dados[i].horario_saida}</p>
-                    <p>{dados[i].horario_retorno}</p>
+                    <p>{dados[i].apresentacao.horario_saida}</p>
+                    <p>{dados[i].apresentacao.horario_retorno}</p>
                 </>
             )
             aux[i].push(
@@ -103,10 +93,10 @@ const useLogic = () => {
             aux[i].push(
                 <>
                     <p>
-                        <u>Embarque:</u> {dados[i].embarque}
+                        <u>Embarque:</u> {dados[i].apresentacao.endereco}
                     </p>
                     <p>
-                        <u>Destino:</u> {dados[i].destino}
+                        <u>Destino:</u> {dados[i].destino.endereco}
                     </p>
                 </>
             )
@@ -117,6 +107,7 @@ const useLogic = () => {
                     key={i}
                     index={i}
                     keyValue={'frota'}
+                    list={getListaVeiculos()}
                 />
             )
             aux[i].push(
@@ -126,6 +117,7 @@ const useLogic = () => {
                     key={i}
                     index={i}
                     keyValue={'motorista'}
+                    list={getListaMotoristas()}
                 />
             )
 
@@ -134,10 +126,7 @@ const useLogic = () => {
         return data
     }
 
-    const rows = createData(dados)
-
-    console.log(headers)
-    console.log(rows)
+    const rows = createData(getDados())
 
     return { headers, rows }
 }
