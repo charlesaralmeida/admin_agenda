@@ -1,7 +1,7 @@
 import { logo_dga } from '../img/logodga'
 import { logo_unicamp } from '../img/logounicamp'
 
-export const header = (detalhes) => [
+export const header = [
     {
         columns: [
             {
@@ -11,10 +11,8 @@ export const header = (detalhes) => [
             },
             {
                 alignment: 'center',
-                text:
-                    'Formulário de Execução de Serviços\n\nSolicitação ' +
-                    detalhes.num_solicitacao,
-                margin: [0, 20],
+                text: 'Formulário de Execução de Serviços',
+                margin: [0, 30],
             },
             {
                 image: logo_unicamp,

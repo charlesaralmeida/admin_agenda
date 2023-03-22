@@ -1,9 +1,12 @@
 import { faixa } from '../faixa'
 import { dados } from './dados'
 
-const faixaIntermediarios = faixa('DESTINO(S) INTERMEDIÁRIO(S)')
+const faixaIntermediario = faixa('DESTINO INTERMEDIÁRIO')
+const faixaIntermediarios = faixa('DESTINOS INTERMEDIÁRIOS')
 
 export const Intermediarios = (detalhes) => [
-    faixaIntermediarios,
+    detalhes.intermediarios.length > 1
+        ? faixaIntermediarios
+        : faixaIntermediario,
     dados(detalhes),
 ]

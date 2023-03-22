@@ -1,3 +1,5 @@
+import { faixa } from '../faixa'
+
 const fsize = 9
 
 const buildInfo = (info) => {
@@ -56,7 +58,23 @@ const buildInfo = (info) => {
 
 const getInfo = (detalhes) => {
     let aux = []
-    detalhes.intermediarios.forEach((element) => aux.push(buildInfo(element)))
+    detalhes.intermediarios.forEach((element, index) => {
+        if (index > 0) {
+            aux.push({
+                canvas: [
+                    {
+                        type: 'line',
+                        x1: 22,
+                        y1: 0,
+                        x2: 552,
+                        y2: 0,
+                        lineWidth: 0.1,
+                    },
+                ],
+            })
+            aux.push(buildInfo(element))
+        } else aux.push(buildInfo(element))
+    })
     return aux
 }
 

@@ -19,7 +19,14 @@ const useLogic = () => {
 
     const handlePrint = () => {
         let dados = getDados().filter((dado, index) => checkbox[index])
-        if (dados.length) openPdfNewWindow(dados[0])
+        if (dados.length)
+            dados.forEach((detalhes) =>
+                savePdf(
+                    'Solicitacao ' +
+                        detalhes.gerais.num_solicitacao.replace('/', '_'),
+                    detalhes
+                )
+            )
     }
 
     const handleChange = (field, key, value) => {
@@ -86,10 +93,10 @@ const useLogic = () => {
             )
             aux[i].push(
                 <div className={styles.numsolicitacao}>
-                    {dados[i].num_solicitacao}
+                    {dados[i].gerais.num_solicitacao}
                 </div>
             )
-            aux[i].push(dados[i].unidade)
+            aux[i].push(dados[i].gerais.unidade)
             aux[i].push(
                 <>
                     <p>
