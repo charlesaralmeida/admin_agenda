@@ -8,15 +8,21 @@ import styles from './.module.css'
 import useLogic from './useLogic'
 
 const DateStaticInput = ({
-    handleChange,
     keyValue,
     state,
     greenDays,
     redDays,
     currentMonth,
     setCurrentMonth,
+    handleChange,
 }) => {
-    const { renderDay } = useLogic(greenDays, redDays)
+    const { renderDay } = useLogic(
+        greenDays,
+        redDays,
+        state,
+        handleChange,
+        keyValue
+    )
 
     return (
         <>
@@ -53,9 +59,7 @@ const DateStaticInput = ({
                         <StaticDatePicker
                             displayStaticWrapperAs="desktop"
                             value={state}
-                            onChange={(newValue) => {
-                                handleChange(keyValue, newValue.toString())
-                            }}
+                            onChange={() => null}
                             renderInput={() => null}
                             inputFormat="dd/MM/yyyy"
                             renderDay={(day) => renderDay(day, currentMonth)}

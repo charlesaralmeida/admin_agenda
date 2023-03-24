@@ -74,3 +74,11 @@ export const compareDate = (date1, date2) =>
     getDateZeroHour(date1).getTime() == getDateZeroHour(date2).getTime()
         ? true
         : false
+
+//string no formato 'dd/MM/YYYY'
+export const parseDateFromString = (string) => {
+    let formatDate = string.split('/')
+    formatDate = formatDate[1] + ' ' + formatDate[0] + ' ' + formatDate[2]
+    formatDate = new Date(Date.parse(formatDate))
+    return formatDate
+}

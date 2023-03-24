@@ -66,6 +66,7 @@ export const BUTTONS = {
 
 export const PAGES = {
     AGENDA: 'AgendaPage',
+    ADMIN: 'AdminPage',
 }
 
 export const TRANSPORT_TYPE = {

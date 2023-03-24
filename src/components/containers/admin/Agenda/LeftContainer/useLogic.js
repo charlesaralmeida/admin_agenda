@@ -1,39 +1,77 @@
-import { useState } from 'react'
+import { parseDateFromString } from 'utils'
+
+import { useDispatch, useSelector } from 'react-redux'
+import {
+    getDados,
+    getTiposServicos,
+    getDataSelecionada,
+    getServico,
+    getCurrentMonth,
+    setServico,
+    setDataSelecionada,
+    setCurrentMonth,
+} from 'redux/slices/admin'
 
 const useLogic = () => {
-    const [empresa, setEmpresa] = useState('')
-    const [date, setDate] = useState(Date.now)
-    const [currentMonth, setCurrentMonth] = useState(
-        new Date(Date.now()).getMonth()
+    const dados = useSelector(getDados)
+    const tipo_servicos = useSelector(getTiposServicos)
+    const servico = useSelector(getServico)
+    const data_selecionada = new Date(
+        Date.parse(useSelector(getDataSelecionada))
     )
+    const currentMonth = useSelector(getCurrentMonth)
+    const dispatch = useDispatch()
 
-    const greenDays = [
-        new Date(Date.parse('01 12 2023')),
-        new Date(Date.parse('02 12 2023')),
-        new Date(Date.parse('02 02 2023')),
-        new Date(Date.parse('02 27 2023')),
-        new Date(Date.parse('02 28 2023')),
-    ]
+    const getSolicitacoes = () => {
+        return dados
+    }
 
-    const redDays = [
-        new Date(Date.parse('02 15 2023')),
-        new Date(Date.parse('02 24 2023')),
-        new Date(Date.parse('03 24 2023')),
-    ]
+    const getDadosMesAtual = () => {
+        const dadosMesAtual = getSolicitacoes().filter(
+            (dado) =>
+                parseDateFromString(
+                    dado.apresentacao.data_atendimento
+                ).getMonth() === currentMonth
+        )
+        return dadosMesAtual
+    }
 
     const handleChange = (field, value) => {
-        if (field === 'empresa') setEmpresa(value)
-        if (field === 'date') setDate(value)
+        if (field === 'date') dispatch(setDataSelecionada(value.toString()))
+        if (field === 'servico') dispatch(setServico(value))
     }
+
+    const setMonth = (month) => dispatch(setCurrentMonth(month))
+
+    let greenDays = []
+    let redDays = []
+
+    //insere os dias em verde
+    getDadosMesAtual().forEach((dado) => {
+        let date = parseDateFromString(dado.apresentacao.data_atendimento)
+        if (dado.veiculo_motorista) greenDays.push(date)
+    })
+
+    //insere os dias em vermelho e retira esses dias da lista de dias verdes
+    getDadosMesAtual().forEach((dado) => {
+        let date = parseDateFromString(dado.apresentacao.data_atendimento)
+        if (!dado.veiculo_motorista) {
+            redDays.push(date)
+            greenDays = greenDays.filter(
+                (e) => e.toString() !== date.toString()
+            )
+        }
+    })
 
     return {
         handleChange,
-        empresa,
-        date,
+        data_selecionada,
         greenDays,
         redDays,
         currentMonth,
-        setCurrentMonth,
+        setMonth,
+        tipo_servicos,
+        servico,
     }
 }
 

@@ -1,33 +1,35 @@
 import DateStaticInput from 'components/inputs/DateStaticInput'
-import EmpresaSelect from 'components/selects/EmpresaSelect'
+import ServicoSelect from '../../../../selects/ServicoSelect'
 import styles from './.module.css'
 import useLogic from './useLogic'
 
 const LeftContainer = () => {
     const {
         handleChange,
-        date,
-        empresa,
+        data_selecionada,
         greenDays,
         redDays,
         currentMonth,
-        setCurrentMonth,
+        setMonth,
+        tipo_servicos,
+        servico,
     } = useLogic()
     return (
         <div className={styles.container}>
             <DateStaticInput
                 handleChange={handleChange}
-                state={date}
+                state={data_selecionada}
                 keyValue={'date'}
                 greenDays={greenDays}
                 redDays={redDays}
                 currentMonth={currentMonth}
-                setCurrentMonth={setCurrentMonth}
+                setCurrentMonth={setMonth}
             />
-            <EmpresaSelect
+            <ServicoSelect
                 handleChange={handleChange}
-                state={empresa}
-                keyValue={'empresa'}
+                state={servico}
+                keyValue={'servico'}
+                servicos={tipo_servicos}
             />
         </div>
     )

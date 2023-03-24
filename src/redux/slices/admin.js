@@ -1,327 +1,279 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { PAGES, PROGRESS_RATE } from '../../utils/constants'
+import { PAGES } from '../../utils/constants'
 
-let fundList = [
-    'CO 4250 - CL 0170',
-    'CO 4250 - CL 0171',
-    'CO 4250 - CL 0172',
-    'CO 4250 - CL 0173',
+const lista_motoristas = ['Claudio Cabreuva da Silva', 'Alberto', 'Silas']
+
+const tipo_servicos = [
+    'Frota Oficial',
+    'Ônibus, micro-ônibus e vans - SP e Campinas',
+    'Ônibus, micro-ônibus e vans - Interestadual',
+    'Carro executivo',
+    'Transporte de carga',
+    'Táxi',
 ]
 
-export const initialState = {
-    progress: 0,
-    currentPage: PAGES.AGENDA,
-    transportType: null,
-    vehicleType: null,
-    busType: null,
-    boardingInfo: {
-        date: new Date().toString(),
-        time: new Date().toString(),
-        uf: 'SP',
-        city: 'Campinas',
-        adress: '',
-        reference: '',
-    },
-    intermediateDestinationInfo: {
-        editing: {
-            uf: 'SP',
-            city: 'Campinas',
-            adress: '',
-            reference: '',
-            estimatedTimeType: 'Horas',
-            estimatedTime: 'Tue Sep 13 2022 00:00:00 GMT-0300 (GMT-03:00)',
-            estimatedDays: '0',
+const lista_veiculos = ['C617', 'C18', 'C619']
+
+const initialState = {
+    currentPage: PAGES.ADMIN,
+    dados: [
+        {
+            gerais: {
+                num_solicitacao: '1045/2023',
+                unidade: 'Hemocentro',
+                solicitante: {
+                    nome: 'JOÃO APARECIDO DOS SANTOS',
+                    telefone: '18614',
+                    email: 'joao@unicamp.br',
+                },
+                recursos: {
+                    tipo: 'RECURSO ORCAMENTARIO',
+                    centro_custo: 'HEMO / 3200000000',
+                },
+                contato: {
+                    emergencia: '999565307',
+                    pos_expediente: '(19) 99956-5307',
+                },
+            },
+            apresentacao: {
+                data_atendimento: '26/03/2023',
+                qtde_passageiros: '01',
+                aguardar_retorno: 'SIM',
+                data_retorno: '13/02/2023',
+                horario_retorno: '15:00',
+                horario_saida: '8:00',
+                passageiro: {
+                    nome: 'FREDERICO JOSé BELTRAMELLY',
+                    telefone: '(19) 3521-8694',
+                },
+                endereco:
+                    'Rua Dr. Antonio Augusto de Almeida, 50 - Campinas/SP',
+                referencia: 'ALMOXARIFADO/HEMOCENTRO',
+            },
+            intermediarios: [],
+            destino: {
+                referencia: 'ALMOXARIFADO/HEMOCENTRO',
+                endereco:
+                    'Rua Dr. Antonio Augusto de Almeida, 530 - Campinas/SP',
+            },
+            adicionais: {
+                voo: {
+                    numero: '7347',
+                    horario: '9:30',
+                },
+                informacoes:
+                    'levar suprimentos do hemocentro para o hospital m. gatti',
+                finalidade:
+                    'levar suprimentos do hemocentro para o hospital m. gatti',
+            },
+            veiculo_motorista: {
+                empresa: 'UNICAMP',
+                veiculo: {
+                    tipo: 'FURGÃO',
+                    frota: '543',
+                    placa: 'DMN-5491',
+                },
+                motorista: {
+                    nome: 'OSVALDO ALVES',
+                    matricula: '227650',
+                    telefone: '99882-4927',
+                },
+            },
         },
-        destinationsList: [],
-        warned: false,
-    },
-    finalDestinationInfo: {
-        uf: 'SP',
-        city: 'Campinas',
-        adress: '',
-        reference: '',
-    },
-    passengersInfo: {
-        editing: {
-            vinculo: '',
-            name: '',
-            documentType: 'Matricula',
-            documentNumber: '',
-            phone: '',
+        {
+            gerais: {
+                num_solicitacao: '1046/2023',
+                unidade: 'Hemocentro',
+                solicitante: {
+                    nome: 'JOÃO APARECIDO DOS SANTOS',
+                    telefone: '18614',
+                    email: 'joao@unicamp.br',
+                },
+                recursos: {
+                    tipo: 'RECURSO ORCAMENTARIO',
+                    centro_custo: 'HEMO / 3200000000',
+                },
+                contato: {
+                    emergencia: '999565307',
+                    pos_expediente: '(19) 99956-5307',
+                },
+            },
+            apresentacao: {
+                data_atendimento: '13/04/2023',
+                qtde_passageiros: '01',
+                aguardar_retorno: 'SIM',
+                data_retorno: '13/02/2023',
+                horario_retorno: '15:00',
+                horario_saida: '8:00',
+                passageiro: {
+                    nome: 'FREDERICO JOSé BELTRAMELLY',
+                    telefone: '(19) 3521-8694',
+                },
+                endereco:
+                    'Rua Dr. Antonio Augusto de Almeida, 50 - Campinas/SP',
+                referencia: 'ALMOXARIFADO/HEMOCENTRO',
+            },
+            intermediarios: [],
+            destino: {
+                referencia: 'ALMOXARIFADO/HEMOCENTRO',
+                endereco:
+                    'Rua Dr. Antonio Augusto de Almeida, 530 - Campinas/SP',
+            },
+            adicionais: {
+                voo: {
+                    numero: '7347',
+                    horario: '9:30',
+                },
+                informacoes:
+                    'levar suprimentos do hemocentro para o hospital m. gatti',
+                finalidade:
+                    'levar suprimentos do hemocentro para o hospital m. gatti',
+            },
+            veiculo_motorista: {
+                empresa: 'UNICAMP',
+                veiculo: {
+                    tipo: 'FURGÃO',
+                    frota: '543',
+                    placa: 'DMN-5491',
+                },
+                motorista: {
+                    nome: 'OSVALDO ALVES',
+                    matricula: '227650',
+                    telefone: '99882-4927',
+                },
+            },
         },
-        passengersList: [],
-        warned: false,
-    },
-    responsavelInfo: {
-        editing: {
-            vinculo: '',
-            name: '',
-            documentType: 'Matricula',
-            documentNumber: '',
-            phone: '',
+        {
+            gerais: {
+                num_solicitacao: '1046/2023',
+                unidade: 'Hemocentro',
+                solicitante: {
+                    nome: 'JOÃO APARECIDO DOS SANTOS',
+                    telefone: '18614',
+                    email: 'joao@unicamp.br',
+                },
+                recursos: {
+                    tipo: 'RECURSO ORCAMENTARIO',
+                    centro_custo: 'HEMO / 3200000000',
+                },
+                contato: {
+                    emergencia: '999565307',
+                    pos_expediente: '(19) 99956-5307',
+                },
+            },
+            apresentacao: {
+                data_atendimento: '13/04/2023',
+                qtde_passageiros: '01',
+                aguardar_retorno: 'SIM',
+                data_retorno: '13/02/2023',
+                horario_retorno: '15:00',
+                horario_saida: '8:00',
+                passageiro: {
+                    nome: 'FREDERICO JOSé BELTRAMELLY',
+                    telefone: '(19) 3521-8694',
+                },
+                endereco:
+                    'Rua Dr. Antonio Augusto de Almeida, 50 - Campinas/SP',
+                referencia: 'ALMOXARIFADO/HEMOCENTRO',
+            },
+            intermediarios: [],
+            destino: {
+                referencia: 'ALMOXARIFADO/HEMOCENTRO',
+                endereco:
+                    'Rua Dr. Antonio Augusto de Almeida, 530 - Campinas/SP',
+            },
+            adicionais: {
+                voo: {
+                    numero: '7347',
+                    horario: '9:30',
+                },
+                informacoes:
+                    'levar suprimentos do hemocentro para o hospital m. gatti',
+                finalidade:
+                    'levar suprimentos do hemocentro para o hospital m. gatti',
+            },
+            veiculo_motorista: {
+                empresa: 'UNICAMP',
+                veiculo: {
+                    tipo: 'FURGÃO',
+                    frota: '543',
+                    placa: 'DMN-5491',
+                },
+                motorista: {
+                    nome: 'OSVALDO ALVES',
+                    matricula: '227650',
+                    telefone: '99882-4927',
+                },
+            },
         },
-        responsavelList: [],
-        warned: false,
-    },
-    passengersSheetList: [],
-    otherInfo: {
-        fund: 0,
-        editing: {
-            fundText: fundList[0],
-            return: false,
-            returnDate: null,
-            returnTime: null,
-            retiradaDate: null,
-            devolucaoDate: null,
-            tripReason: '',
-            other: '',
-        },
-        fundList: fundList,
-    },
+    ],
+    lista_motoristas: lista_motoristas,
+    tipo_servicos: tipo_servicos,
+    lista_veiculos: lista_veiculos,
+    servico: '',
+    data_selecionada: new Date(Date.now()),
+    current_month: new Date(Date.now()).getMonth(),
 }
 
 export const slice = createSlice({
     name: 'admin',
     initialState,
     reducers: {
-        incrementProgress(state) {
-            return {
-                ...state,
-                progress: state.progress + PROGRESS_RATE,
-            }
-        },
-        decrementProgress(state) {
-            return {
-                ...state,
-                progress: state.progress - PROGRESS_RATE,
-            }
-        },
         setPage(state, { payload }) {
             return {
                 ...state,
                 currentPage: payload,
             }
         },
-        setTransportType(state, { payload }) {
+        setMotorista(state, { payload }) {
             return {
                 ...state,
-                transportType: payload,
-            }
-        },
-        setVehicleType(state, { payload }) {
-            return {
-                ...state,
-                vehicleType: payload,
-            }
-        },
-        setBusType(state, { payload }) {
-            return {
-                ...state,
-                busType: payload,
-            }
-        },
-        setBoardingInfo(state, { payload }) {
-            return {
-                ...state,
-                boardingInfo: {
-                    ...state.boardingInfo,
-                    [payload.key]: payload.value,
-                },
-            }
-        },
-        setIntermediateDestinationInfo(state, { payload }) {
-            return {
-                ...state,
-                intermediateDestinationInfo: {
-                    ...state.intermediateDestinationInfo,
-                    editing: {
-                        ...state.intermediateDestinationInfo.editing,
-                        [payload.key]: payload.value,
+                veiculo_motorista: {
+                    ...state.veiculo_motorista,
+                    veiculo: {
+                        ...state.veiculo_motorista.veiculo,
+                        frota: payload,
                     },
                 },
             }
         },
-        setIntermediateDestinationWarned(state) {
+        setServico(state, { payload }) {
             return {
                 ...state,
-                intermediateDestinationInfo: {
-                    ...state.intermediateDestinationInfo,
-                    warned: true,
-                },
+                servico: payload,
             }
         },
-        addIntermediateDestination: (state, { payload }) => {
+        setDataSelecionada(state, { payload }) {
             return {
                 ...state,
-                intermediateDestinationInfo: {
-                    editing: initialState.intermediateDestinationInfo.editing,
-                    destinationsList: payload,
-                },
+                data_selecionada: payload,
             }
         },
-        removeIntermediateDestination: (state, { payload }) => {
+        setCurrentMonth(state, { payload }) {
             return {
                 ...state,
-                intermediateDestinationInfo: {
-                    editing: state.intermediateDestinationInfo.editing,
-                    destinationsList: payload,
-                },
+                current_month: payload,
             }
-        },
-        setFinalDestinationInfo(state, { payload }) {
-            return {
-                ...state,
-                finalDestinationInfo: {
-                    ...state.finalDestinationInfo,
-                    [payload.key]: payload.value,
-                },
-            }
-        },
-        setPassengersInfo(state, { payload }) {
-            return {
-                ...state,
-                passengersInfo: {
-                    ...state.passengersInfo,
-                    editing: {
-                        ...state.passengersInfo.editing,
-                        [payload.key]: payload.value,
-                    },
-                },
-            }
-        },
-        setPassengersWarned(state) {
-            return {
-                ...state,
-                passengersInfo: {
-                    ...state.passengersInfo,
-                    warned: true,
-                },
-            }
-        },
-        addPassengers: (state, { payload }) => {
-            return {
-                ...state,
-                passengersInfo: {
-                    editing: initialState.passengersInfo.editing,
-                    passengersList: payload,
-                },
-            }
-        },
-        removePassengers: (state, { payload }) => {
-            return {
-                ...state,
-                passengersInfo: {
-                    editing: state.passengersInfo.editing,
-                    passengersList: payload,
-                },
-            }
-        },
-        setResponsavelInfo(state, { payload }) {
-            return {
-                ...state,
-                responsavelInfo: {
-                    ...state.responsavelInfo,
-                    editing: {
-                        ...state.responsavelInfo.editing,
-                        [payload.key]: payload.value,
-                    },
-                },
-            }
-        },
-        addResponsavel(state, { payload }) {
-            return {
-                ...state,
-                responsavelInfo: {
-                    editing: initialState.responsavelInfo.editing,
-                    responsavelList: payload,
-                },
-            }
-        },
-        setResponsavelWarned(state) {
-            return {
-                ...state,
-                responsavelInfo: {
-                    ...state.responsavelInfo,
-                    warned: true,
-                },
-            }
-        },
-        removeResponsavel(state, { payload }) {
-            return {
-                ...state,
-                responsavelInfo: {
-                    editing: state.responsavelInfo.editing,
-                    responsavelList: payload,
-                },
-            }
-        },
-        setPassengerSheetList(state, { payload }) {
-            return {
-                ...state,
-                passengersSheetList: payload,
-            }
-        },
-        setOtherInfo(state, { payload }) {
-            if (payload.key === 'fund') {
-                return {
-                    ...state,
-                    otherInfo: {
-                        ...state.otherInfo,
-                        fund: payload.value,
-                    },
-                }
-            } else
-                return {
-                    ...state,
-                    otherInfo: {
-                        ...state.otherInfo,
-                        editing: {
-                            ...state.otherInfo.editing,
-                            [payload.key]: payload.value,
-                        },
-                    },
-                }
         },
     },
 })
 
 export const {
-    incrementProgress,
-    decrementProgress,
     setPage,
-    setTransportType,
-    setVehicleType,
-    setBusType,
-    setBoardingInfo,
-    setIntermediateDestinationInfo,
-    setIntermediateDestinationWarned,
-    addIntermediateDestination,
-    removeIntermediateDestination,
-    setFinalDestinationInfo,
-    setPassengersInfo,
-    setPassengersWarned,
-    addPassengers,
-    removePassengers,
-    setResponsavelInfo,
-    addResponsavel,
-    removeResponsavel,
-    setResponsavelWarned,
-    setPassengerSheetList,
-    setOtherInfo,
+    setMotorista,
+    setServico,
+    setDate,
+    setDataSelecionada,
+    setCurrentMonth,
 } = slice.actions
 
 export const getState = (state) => state.admin
-export const getBoardingInfo = (state) => state.agendar.boardingInfo
-export const getIntermediateDestinationInfo = (state) =>
-    state.agendar.intermediateDestinationInfo
-export const getFinalDestinationInfo = (state) =>
-    state.agendar.finalDestinationInfo
-export const getPassengersInfo = (state) => state.agendar.passengersInfo
-export const getResponsavelInfo = (state) => state.agendar.responsavelInfo
-export const getOtherInfo = (state) => state.agendar.otherInfo
-export const getVehicleType = (state) => state.agendar.vehicleType
-export const getTransportType = (state) => state.agendar.transportType
-export const getPassengerSheetList = (state) =>
-    state.agendar.passengersSheetList
+export const getDados = (state) => state.admin.dados
+export const getListaMotoristas = (state) => state.admin.lista_motoristas
+export const getTiposServicos = (state) => state.admin.tipo_servicos
+export const getListaVeiculos = (state) => state.admin.lista_veiculos
+export const getServico = (state) => state.admin.servico
+export const getDataSelecionada = (state) => state.admin.data_selecionada
+export const getCurrentMonth = (state) => state.admin.current_month
 
 export default slice.reducer

@@ -4,23 +4,77 @@ import MotoristaSelect from '../../../../selects/MotoristaSelect'
 import styles from './.module.css'
 import { ICONS, COLORS } from '../../../../../utils/constants'
 import ButtonWithIcon from '../../../../buttons/ButtonWithIcon'
-import { dados, lista_motoristas, lista_veiculos } from './mockdata'
 import { savePdf, openPdfNewWindow } from 'components/pdf/pdfMake'
 
+import { useSelector } from 'react-redux'
+import {
+    getDados,
+    getListaMotoristas,
+    getListaVeiculos,
+    getDataSelecionada,
+} from 'redux/slices/admin'
+import { compareDate, parseDateFromString } from '../../../../../utils'
+
 const useLogic = () => {
-    const getDados = () => {
-        return dados
+    const dados = useSelector(getDados)
+    console.log(dados)
+    const lista_motoristas = useSelector(getListaMotoristas)
+    const lista_veiculos = useSelector(getListaVeiculos)
+    const data_selecionada = new Date(
+        Date.parse(useSelector(getDataSelecionada))
+    )
+
+    const getSolicitacoes = () => {
+        let data_atual = data_selecionada
+        let dados_index = dados.map((dado, index) => {
+            let dado_index = { ...dado }
+            dado_index.index = index
+            return dado_index
+        })
+        let dados_data_selecionada = dados_index.filter((dado) => {
+            let data_atendimento = new Date(
+                parseDateFromString(dado.apresentacao.data_atendimento)
+            )
+            return compareDate(data_atual, data_atendimento)
+        })
+
+        console.log(dados_data_selecionada)
+        return dados_data_selecionada
     }
 
-    const [checkbox, setCheckbox] = useState(() => getDados().map(() => false))
+    const [checkbox, setCheckbox] = useState(() =>
+        getSolicitacoes().map(() => false)
+    )
 
     const [frota, setFrota] = useState([])
     const [motorista, setMotorista] = useState([])
 
+    const handleMotoristas = (motorista) => {
+        setMotorista(motorista)
+    }
+
+    const handleFrota = (frota) => {
+        setFrota(frota)
+    }
+
     const handlePrint = () => {
-        let dados = getDados().filter((dado, index) => checkbox[index])
-        if (dados.length)
-            dados.forEach((detalhes) =>
+        let solicitacoes = getSolicitacoes().filter(
+            (solicitacao, index) => checkbox[index]
+        )
+        if (solicitacoes.length)
+            solicitacoes.forEach((detalhes) =>
+                savePdf(
+                    'Solicitacao ' +
+                        detalhes.gerais.num_solicitacao.replace('/', '_'),
+                    detalhes
+                )
+            )
+    }
+
+    const handlePrintAll = () => {
+        let solicitacoes = getSolicitacoes()
+        if (solicitacoes.length)
+            solicitacoes.forEach((detalhes) =>
                 savePdf(
                     'Solicitacao ' +
                         detalhes.gerais.num_solicitacao.replace('/', '_'),
@@ -41,13 +95,13 @@ const useLogic = () => {
         if (field === 'frota') {
             aux = frota
             aux[key] = value
-            setFrota(aux)
+            handleFrota(aux)
         }
 
         if (field === 'motorista') {
             aux = motorista
             aux[key] = value
-            setMotorista(aux)
+            handleMotoristas(aux)
         }
     }
 
@@ -63,14 +117,6 @@ const useLogic = () => {
         'Frota',
         'Motorista',
     ]
-
-    const getListaMotoristas = () => {
-        return lista_motoristas
-    }
-
-    const getListaVeiculos = () => {
-        return lista_veiculos
-    }
 
     const createData = (dados) => {
         const data = []
@@ -114,7 +160,7 @@ const useLogic = () => {
                     key={i}
                     index={i}
                     keyValue={'frota'}
-                    list={getListaVeiculos()}
+                    list={lista_veiculos}
                 />
             )
             aux[i].push(
@@ -124,7 +170,7 @@ const useLogic = () => {
                     key={i}
                     index={i}
                     keyValue={'motorista'}
-                    list={getListaMotoristas()}
+                    list={lista_motoristas}
                 />
             )
 
@@ -133,9 +179,9 @@ const useLogic = () => {
         return data
     }
 
-    const rows = createData(getDados())
+    const rows = createData(getSolicitacoes())
 
-    return { headers, rows }
+    return { headers, rows, handlePrintAll }
 }
 
 export default useLogic

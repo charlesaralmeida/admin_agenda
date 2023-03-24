@@ -1,6 +1,5 @@
 import UserViewHeader from '../components/header/userViewHeader'
-import AgendaPage from './AgendaPage'
-import LinearProgress from '@mui/material/LinearProgress'
+import AdminPage from './AdminPage'
 import { useSelector } from 'react-redux'
 import { getState } from '../redux/slices/admin'
 import { PAGES } from '../utils/constants'
@@ -10,8 +9,8 @@ const AdminPages = () => {
     const state = useSelector(getState)
     const getPage = (pageName) => {
         switch (pageName) {
-            case PAGES.AGENDA:
-                return <AgendaPage />
+            case PAGES.ADMIN:
+                return <AdminPage />
         }
     }
 

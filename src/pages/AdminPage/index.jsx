@@ -2,7 +2,7 @@ import LeftContainer from 'components/containers/admin/Agenda/LeftContainer'
 import MainContainer from 'components/containers/admin/Agenda/MainContainer'
 import styles from './.module.css'
 
-const AgendaPage = () => {
+const AdminPage = () => {
     return (
         <div className={styles.container}>
             <LeftContainer />
@@ -11,4 +11,4 @@ const AgendaPage = () => {
     )
 }
 
-export default AgendaPage
+export default AdminPage

@@ -1,11 +1,9 @@
 import { compareDate } from '../../../utils'
 import { PickersDay } from '@mui/x-date-pickers'
 import styles from './.module.css'
-import { useState } from 'react'
 
-const useLogic = (greenDays, redDays) => {
-    const [selected, setSelected] = useState(new Date(Date.now()))
-
+const useLogic = (greenDays, redDays, state, handleChange, keyValue) => {
+    const selected = state
     const isSelected = (day) => (compareDate(day, selected) ? true : false)
 
     const getMarkedDays = (day, markedDays) => {
@@ -29,7 +27,7 @@ const useLogic = (greenDays, redDays) => {
                 outsideCurrentMonth={false}
                 key={day}
                 showDaysOutsideCurrentMonth={false}
-                onDaySelect={() => setSelected(day)}
+                onDaySelect={() => handleChange(keyValue, day)}
                 selected={isSelected(day)}
             >
                 <div className={classStyle}>

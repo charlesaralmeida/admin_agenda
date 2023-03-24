@@ -6,6 +6,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     font-family: 'Roboto';
 }
 
@@ -33,11 +34,26 @@
 
 .quantidade {
     text-align: right;
-    width: 95%;
+    width: 100%;
     font-weight: bold;
 }
 
 .zeroquantidade {
     text-align: center;
     font-weight: bold;
+}
+
+.bottom {
+    height: 10%;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.button_container {
+    margin-left: 5%;
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
 }
