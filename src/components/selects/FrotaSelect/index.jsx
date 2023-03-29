@@ -10,9 +10,9 @@ const FrotaSelect = ({ handleChange, keyValue, state, index, list }) => {
             className={styles.select}
         >
             <option value=""></option>
-            {list.map((frota, index) => (
-                <option value={index} key={index}>
-                    {frota}
+            {list.map((veiculo, index) => (
+                <option value={veiculo.id} key={index}>
+                    {veiculo.frota}
                 </option>
             ))}
         </select>

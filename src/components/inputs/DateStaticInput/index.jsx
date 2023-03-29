@@ -12,13 +12,14 @@ const DateStaticInput = ({
     state,
     greenDays,
     redDays,
+    yellowDays,
     currentMonth,
-    setCurrentMonth,
     handleChange,
 }) => {
     const { renderDay } = useLogic(
         greenDays,
         redDays,
+        yellowDays,
         state,
         handleChange,
         keyValue
@@ -64,7 +65,7 @@ const DateStaticInput = ({
                             inputFormat="dd/MM/yyyy"
                             renderDay={(day) => renderDay(day, currentMonth)}
                             onMonthChange={(day) =>
-                                setCurrentMonth(day.getMonth())
+                                handleChange('mes', day.getMonth())
                             }
                         />
                     </Box>

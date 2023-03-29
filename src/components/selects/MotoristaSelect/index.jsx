@@ -11,8 +11,8 @@ const MotoristaSelect = ({ handleChange, keyValue, state, index, list }) => {
         >
             <option value=""></option>
             {list.map((motorista, index) => (
-                <option value={index} key={index}>
-                    {motorista}
+                <option value={motorista.id} key={index}>
+                    {motorista.nome}
                 </option>
             ))}
         </select>

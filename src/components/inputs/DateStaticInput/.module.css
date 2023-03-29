@@ -15,3 +15,9 @@
     font-weight: bolder;
     font-size: large;
 }
+
+.yellow {
+    color: var(--ORANGE);
+    font-weight: bolder;
+    font-size: large;
+}

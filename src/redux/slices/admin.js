@@ -1,219 +1,51 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { PAGES } from '../../utils/constants'
+import { parseDateFromString, compareDate } from '../../utils'
+import { getDados } from '../../components/containers/admin/Agenda/MainContainer/db.js'
 
-const lista_motoristas = ['Claudio Cabreuva da Silva', 'Alberto', 'Silas']
-
-const tipo_servicos = [
-    'Frota Oficial',
-    'Ônibus, micro-ônibus e vans - SP e Campinas',
-    'Ônibus, micro-ônibus e vans - Interestadual',
-    'Carro executivo',
-    'Transporte de carga',
-    'Táxi',
-]
-
-const lista_veiculos = ['C617', 'C18', 'C619']
+const dados = getDados()
 
 const initialState = {
     currentPage: PAGES.ADMIN,
-    dados: [
-        {
-            gerais: {
-                num_solicitacao: '1045/2023',
-                unidade: 'Hemocentro',
-                solicitante: {
-                    nome: 'JOÃO APARECIDO DOS SANTOS',
-                    telefone: '18614',
-                    email: 'joao@unicamp.br',
-                },
-                recursos: {
-                    tipo: 'RECURSO ORCAMENTARIO',
-                    centro_custo: 'HEMO / 3200000000',
-                },
-                contato: {
-                    emergencia: '999565307',
-                    pos_expediente: '(19) 99956-5307',
-                },
-            },
-            apresentacao: {
-                data_atendimento: '26/03/2023',
-                qtde_passageiros: '01',
-                aguardar_retorno: 'SIM',
-                data_retorno: '13/02/2023',
-                horario_retorno: '15:00',
-                horario_saida: '8:00',
-                passageiro: {
-                    nome: 'FREDERICO JOSé BELTRAMELLY',
-                    telefone: '(19) 3521-8694',
-                },
-                endereco:
-                    'Rua Dr. Antonio Augusto de Almeida, 50 - Campinas/SP',
-                referencia: 'ALMOXARIFADO/HEMOCENTRO',
-            },
-            intermediarios: [],
-            destino: {
-                referencia: 'ALMOXARIFADO/HEMOCENTRO',
-                endereco:
-                    'Rua Dr. Antonio Augusto de Almeida, 530 - Campinas/SP',
-            },
-            adicionais: {
-                voo: {
-                    numero: '7347',
-                    horario: '9:30',
-                },
-                informacoes:
-                    'levar suprimentos do hemocentro para o hospital m. gatti',
-                finalidade:
-                    'levar suprimentos do hemocentro para o hospital m. gatti',
-            },
-            veiculo_motorista: {
-                empresa: 'UNICAMP',
-                veiculo: {
-                    tipo: 'FURGÃO',
-                    frota: '543',
-                    placa: 'DMN-5491',
-                },
-                motorista: {
-                    nome: 'OSVALDO ALVES',
-                    matricula: '227650',
-                    telefone: '99882-4927',
-                },
-            },
-        },
-        {
-            gerais: {
-                num_solicitacao: '1046/2023',
-                unidade: 'Hemocentro',
-                solicitante: {
-                    nome: 'JOÃO APARECIDO DOS SANTOS',
-                    telefone: '18614',
-                    email: 'joao@unicamp.br',
-                },
-                recursos: {
-                    tipo: 'RECURSO ORCAMENTARIO',
-                    centro_custo: 'HEMO / 3200000000',
-                },
-                contato: {
-                    emergencia: '999565307',
-                    pos_expediente: '(19) 99956-5307',
-                },
-            },
-            apresentacao: {
-                data_atendimento: '13/04/2023',
-                qtde_passageiros: '01',
-                aguardar_retorno: 'SIM',
-                data_retorno: '13/02/2023',
-                horario_retorno: '15:00',
-                horario_saida: '8:00',
-                passageiro: {
-                    nome: 'FREDERICO JOSé BELTRAMELLY',
-                    telefone: '(19) 3521-8694',
-                },
-                endereco:
-                    'Rua Dr. Antonio Augusto de Almeida, 50 - Campinas/SP',
-                referencia: 'ALMOXARIFADO/HEMOCENTRO',
-            },
-            intermediarios: [],
-            destino: {
-                referencia: 'ALMOXARIFADO/HEMOCENTRO',
-                endereco:
-                    'Rua Dr. Antonio Augusto de Almeida, 530 - Campinas/SP',
-            },
-            adicionais: {
-                voo: {
-                    numero: '7347',
-                    horario: '9:30',
-                },
-                informacoes:
-                    'levar suprimentos do hemocentro para o hospital m. gatti',
-                finalidade:
-                    'levar suprimentos do hemocentro para o hospital m. gatti',
-            },
-            veiculo_motorista: {
-                empresa: 'UNICAMP',
-                veiculo: {
-                    tipo: 'FURGÃO',
-                    frota: '543',
-                    placa: 'DMN-5491',
-                },
-                motorista: {
-                    nome: 'OSVALDO ALVES',
-                    matricula: '227650',
-                    telefone: '99882-4927',
-                },
-            },
-        },
-        {
-            gerais: {
-                num_solicitacao: '1046/2023',
-                unidade: 'Hemocentro',
-                solicitante: {
-                    nome: 'JOÃO APARECIDO DOS SANTOS',
-                    telefone: '18614',
-                    email: 'joao@unicamp.br',
-                },
-                recursos: {
-                    tipo: 'RECURSO ORCAMENTARIO',
-                    centro_custo: 'HEMO / 3200000000',
-                },
-                contato: {
-                    emergencia: '999565307',
-                    pos_expediente: '(19) 99956-5307',
-                },
-            },
-            apresentacao: {
-                data_atendimento: '13/04/2023',
-                qtde_passageiros: '01',
-                aguardar_retorno: 'SIM',
-                data_retorno: '13/02/2023',
-                horario_retorno: '15:00',
-                horario_saida: '8:00',
-                passageiro: {
-                    nome: 'FREDERICO JOSé BELTRAMELLY',
-                    telefone: '(19) 3521-8694',
-                },
-                endereco:
-                    'Rua Dr. Antonio Augusto de Almeida, 50 - Campinas/SP',
-                referencia: 'ALMOXARIFADO/HEMOCENTRO',
-            },
-            intermediarios: [],
-            destino: {
-                referencia: 'ALMOXARIFADO/HEMOCENTRO',
-                endereco:
-                    'Rua Dr. Antonio Augusto de Almeida, 530 - Campinas/SP',
-            },
-            adicionais: {
-                voo: {
-                    numero: '7347',
-                    horario: '9:30',
-                },
-                informacoes:
-                    'levar suprimentos do hemocentro para o hospital m. gatti',
-                finalidade:
-                    'levar suprimentos do hemocentro para o hospital m. gatti',
-            },
-            veiculo_motorista: {
-                empresa: 'UNICAMP',
-                veiculo: {
-                    tipo: 'FURGÃO',
-                    frota: '543',
-                    placa: 'DMN-5491',
-                },
-                motorista: {
-                    nome: 'OSVALDO ALVES',
-                    matricula: '227650',
-                    telefone: '99882-4927',
-                },
-            },
-        },
-    ],
-    lista_motoristas: lista_motoristas,
-    tipo_servicos: tipo_servicos,
-    lista_veiculos: lista_veiculos,
-    servico: '',
-    data_selecionada: new Date(Date.now()),
+    dados: getDados(),
+    servico_selecionado_id: 1,
+    frotas_selecionadas: [],
+    motoristas_selecionados: [],
+    data_selecionada: new Date(Date.now()).toString(),
     current_month: new Date(Date.now()).getMonth(),
 }
+
+const getDadosHoje = () => {
+    let data_atual = new Date(Date.now())
+    let dados_data_selecionada = initialState.dados.filter((dado) => {
+        let data_atendimento = new Date(
+            parseDateFromString(dado.apresentacao.data_atendimento)
+        )
+        return compareDate(data_atual, data_atendimento)
+    })
+
+    let dados_servico_selecionado = dados_data_selecionada.filter(
+        (dado) => dado.gerais.servico_id === initialState.servico_selecionado_id
+    )
+
+    return dados_servico_selecionado
+}
+
+initialState.frotas_selecionadas = getDadosHoje().map((dado) => {
+    if (dado.veiculo_motorista)
+        if (dado.veiculo_motorista.veiculo_id)
+            return dado.veiculo_motorista.veiculo_id
+                ? dado.veiculo_motorista.veiculo_id
+                : ''
+})
+
+initialState.motoristas_selecionados = getDadosHoje().map((dado) => {
+    if (dado.veiculo_motorista)
+        if (dado.veiculo_motorista.motorista_id)
+            return dado.veiculo_motorista.motorista_id
+                ? dado.veiculo_motorista.motorista_id
+                : ''
+})
 
 export const slice = createSlice({
     name: 'admin',
@@ -225,22 +57,16 @@ export const slice = createSlice({
                 currentPage: payload,
             }
         },
-        setMotorista(state, { payload }) {
+        setDados(state, { payload }) {
             return {
                 ...state,
-                veiculo_motorista: {
-                    ...state.veiculo_motorista,
-                    veiculo: {
-                        ...state.veiculo_motorista.veiculo,
-                        frota: payload,
-                    },
-                },
+                dados: payload,
             }
         },
-        setServico(state, { payload }) {
+        setServicoSelecionado(state, { payload }) {
             return {
                 ...state,
-                servico: payload,
+                servico_selecionado_id: payload,
             }
         },
         setDataSelecionada(state, { payload }) {
@@ -255,25 +81,68 @@ export const slice = createSlice({
                 current_month: payload,
             }
         },
+        setFrotasSelecionadas(state, { payload }) {
+            return {
+                ...state,
+                frotas_selecionadas: payload,
+            }
+        },
+        setMotoristasSelecionados(state, { payload }) {
+            return {
+                ...state,
+                motoristas_selecionados: payload,
+            }
+        },
     },
 })
 
 export const {
     setPage,
+    setDados,
+    setFrota,
     setMotorista,
-    setServico,
-    setDate,
+    setServicoSelecionado,
     setDataSelecionada,
     setCurrentMonth,
+    setFrotasSelecionadas,
+    setMotoristasSelecionados,
 } = slice.actions
 
 export const getState = (state) => state.admin
-export const getDados = (state) => state.admin.dados
-export const getListaMotoristas = (state) => state.admin.lista_motoristas
-export const getTiposServicos = (state) => state.admin.tipo_servicos
-export const getListaVeiculos = (state) => state.admin.lista_veiculos
-export const getServico = (state) => state.admin.servico
+export const getServicoSelecionado = (state) =>
+    state.admin.servico_selecionado_id
 export const getDataSelecionada = (state) => state.admin.data_selecionada
+export const getFrotasSelecionadas = (state) => state.admin.frotas_selecionadas
+export const getMotoristasSelecionados = (state) =>
+    state.admin.motoristas_selecionados
 export const getCurrentMonth = (state) => state.admin.current_month
+
+export const getDadosMesAtual = (state) => {
+    const dadosMesAtual = state.admin.dados.filter((dado) => {
+        let result =
+            parseDateFromString(
+                dado.apresentacao.data_atendimento
+            ).getMonth() === state.admin.current_month
+        return result
+    })
+
+    return dadosMesAtual
+}
+
+export const getDadosDataAtual = (state) => {
+    let data_atual = new Date(state.admin.data_selecionada)
+    let dados_data_selecionada = state.admin.dados.filter((dado) => {
+        let data_atendimento = new Date(
+            parseDateFromString(dado.apresentacao.data_atendimento)
+        )
+        return compareDate(data_atual, data_atendimento)
+    })
+
+    let dados_servico_selecionado = dados_data_selecionada.filter(
+        (dado) => dado.gerais.servico_id === state.admin.servico_selecionado_id
+    )
+
+    return dados_servico_selecionado
+}
 
 export default slice.reducer

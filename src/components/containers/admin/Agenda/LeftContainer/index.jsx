@@ -9,27 +9,28 @@ const LeftContainer = () => {
         data_selecionada,
         greenDays,
         redDays,
+        yellowDays,
         currentMonth,
-        setMonth,
-        tipo_servicos,
-        servico,
+        lista_servicos,
+        servico_selecionado,
     } = useLogic()
+
     return (
         <div className={styles.container}>
             <DateStaticInput
                 handleChange={handleChange}
                 state={data_selecionada}
-                keyValue={'date'}
+                keyValue={'data'}
                 greenDays={greenDays}
                 redDays={redDays}
+                yellowDays={yellowDays}
                 currentMonth={currentMonth}
-                setCurrentMonth={setMonth}
             />
             <ServicoSelect
                 handleChange={handleChange}
-                state={servico}
+                state={servico_selecionado}
                 keyValue={'servico'}
-                servicos={tipo_servicos}
+                lista_servicos={lista_servicos}
             />
         </div>
     )

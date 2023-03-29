@@ -2,9 +2,11 @@ export const COLORS = {
     PRIMARY: '#002C52',
     SECONDARY: '#002c5233',
     RED: '#9E2727',
+    LIGHT_RED: '#9E2727',
     GREEN: '#499a26',
     WHITE: '#ffffff',
-    YELLOW: '#e4df1c',
+    YELLOW: '#9C9E27',
+    ORANGE: '#FF5733',
 }
 
 export const ICONS = {

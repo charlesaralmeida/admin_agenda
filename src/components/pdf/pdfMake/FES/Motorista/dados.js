@@ -27,7 +27,7 @@ const info = (detalhes) => {
     return {
         fontSize: fsize,
         table: {
-            widths: ['16%', '25%', '10%', '8%', '15%', '15%'],
+            widths: ['16%', '25%', '10%', '15%', '10%', '13%'],
             body: [
                 [
                     {
@@ -63,14 +63,14 @@ const info = (detalhes) => {
                         bold: true,
                     },
                     {
-                        text: 'Matrícula:',
+                        text: 'Matr./CPF:',
                     },
                     {
                         text: detalhes.motorista.matricula,
                         bold: true,
                     },
                     {
-                        text: 'Telefone Condutor:',
+                        text: 'Telefone:',
                     },
                     {
                         text: detalhes.motorista.telefone,
@@ -84,6 +84,6 @@ const info = (detalhes) => {
 }
 
 export const dados = (detalhes) => [
-    empresa(detalhes.veiculo_motorista.empresa),
+    empresa(detalhes.veiculo_motorista.empresa.nome),
     info(detalhes.veiculo_motorista),
 ]
