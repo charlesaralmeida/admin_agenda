@@ -6,6 +6,7 @@ import FrotaSelect from '../../../../selects/FrotaSelect'
 import MotoristaSelect from '../../../../selects/MotoristaSelect'
 import ButtonWithIcon from '../../../../buttons/ButtonWithIcon'
 import { ICONS, COLORS } from '../../../../../utils/constants'
+import EmpresaSelect from '../../../../selects/EmpresaSelect'
 
 const SolicitacoesContainer = () => {
     const {
@@ -17,8 +18,10 @@ const SolicitacoesContainer = () => {
         dados,
         frotas_selecionadas,
         motoristas_selecionados,
+        empresas_selecionadas,
         lista_motoristas,
         lista_veiculos,
+        lista_empresas,
     } = useLogic()
 
     const headers = [
@@ -92,6 +95,17 @@ const SolicitacoesContainer = () => {
                     index={i}
                     keyValue={'motorista'}
                     list={lista_motoristas}
+                />
+            )
+
+            aux[i].push(
+                <EmpresaSelect
+                    handleChange={handleChange}
+                    state={empresas_selecionadas[i]}
+                    key={i}
+                    index={i}
+                    keyValue={'empresa'}
+                    list={lista_empresas}
                 />
             )
 

@@ -14,7 +14,7 @@ const dados = [
             },
         },
         apresentacao: {
-            data_atendimento: '27/03/2023',
+            data_atendimento: '03/04/2023',
             qtde_passageiros: '01',
             aguardar_retorno: 'SIM',
             data_retorno: '13/02/2023',
@@ -63,8 +63,8 @@ const dados = [
         },
         veiculo_motorista: {
             empresa_id: 1,
-
             motorista_id: 1,
+            veiculo_id: 3,
         },
     },
     {
@@ -216,7 +216,7 @@ const dados = [
             finalidade:
                 'levar suprimentos do hemocentro para o hospital m. gatti',
         },
-        veiculo_motorista: { empresa_id: 1, veiculo_id: 1, motorista_id: 1 },
+        veiculo_motorista: { empresa_id: 1, veiculo_id: 1, motorista_id: 2 },
     },
 ]
 
@@ -255,7 +255,7 @@ const lista_motoristas = [
 ]
 
 const lista_servicos = [
-    { id: 1, descricao: 'Frota Oficial', empresa_id: 1 },
+    { id: 1, descricao: 'Carro normal', empresa_id: 1 },
     {
         id: 2,
         descricao: 'Ônibus, micro-ônibus e vans - SP e Campinas',
@@ -319,13 +319,13 @@ export const getRecurso = (id) =>
     listas.recursos.filter((recurso) => recurso.id === id)[0]
 
 //recuperar somente dados do mes corrente pra não sobrecarregar
-export const getDados = () => {
+export const getDadosMesAtual = (current_month) => {
     //inserir busca no banco de dados aqui e atribuir a "dados"
     const dadosMesAtual = dados.filter(
         (dado) =>
             parseDateFromString(
                 dado.apresentacao.data_atendimento
-            ).getMonth() === new Date(Date.now()).getMonth()
+            ).getMonth() === current_month
     )
     return dadosMesAtual
 }

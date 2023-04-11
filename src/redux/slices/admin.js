@@ -1,16 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { PAGES } from '../../utils/constants'
 import { parseDateFromString, compareDate } from '../../utils'
-import { getDados } from '../../components/containers/admin/Agenda/MainContainer/db.js'
-
-const dados = getDados()
+import { getDadosMesAtual } from '../../components/containers/admin/Agenda/MainContainer/db.js'
 
 const initialState = {
     currentPage: PAGES.ADMIN,
-    dados: getDados(),
+    dados: getDadosMesAtual(new Date(Date.now()).getMonth()),
     servico_selecionado_id: 1,
     frotas_selecionadas: [],
     motoristas_selecionados: [],
+    empresas_selecionadas: [],
     data_selecionada: new Date(Date.now()).toString(),
     current_month: new Date(Date.now()).getMonth(),
 }
@@ -45,6 +44,15 @@ initialState.motoristas_selecionados = getDadosHoje().map((dado) => {
             return dado.veiculo_motorista.motorista_id
                 ? dado.veiculo_motorista.motorista_id
                 : ''
+})
+
+initialState.empresas_selecionadas = getDadosHoje().map((dado) => {
+    if (dado.veiculo_motorista) {
+        if (dado.veiculo_motorista.empresa_id)
+            return dado.veiculo_motorista.empresa_id
+                ? dado.veiculo_motorista.empresa_id
+                : ''
+    }
 })
 
 export const slice = createSlice({
@@ -115,19 +123,11 @@ export const getDataSelecionada = (state) => state.admin.data_selecionada
 export const getFrotasSelecionadas = (state) => state.admin.frotas_selecionadas
 export const getMotoristasSelecionados = (state) =>
     state.admin.motoristas_selecionados
+export const getEmpresasSelecionadas = (state) =>
+    state.admin.empresas_selecionadas
 export const getCurrentMonth = (state) => state.admin.current_month
 
-export const getDadosMesAtual = (state) => {
-    const dadosMesAtual = state.admin.dados.filter((dado) => {
-        let result =
-            parseDateFromString(
-                dado.apresentacao.data_atendimento
-            ).getMonth() === state.admin.current_month
-        return result
-    })
-
-    return dadosMesAtual
-}
+export const getDados = (state) => state.admin.dados
 
 export const getDadosDataAtual = (state) => {
     let data_atual = new Date(state.admin.data_selecionada)

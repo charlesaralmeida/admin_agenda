@@ -1,27 +1,22 @@
 import { InputLabel, Select, MenuItem, FormControl } from '@mui/material'
 import styles from './.module.css'
 
-const EmpresaSelect = ({ handleChange, keyValue, state }) => {
-    const label = 'Selecione a empresa'
-
+const EmpresaSelect = ({ handleChange, keyValue, state, index, list }) => {
     return (
-        <div className={styles.select}>
-            <FormControl fullWidth>
-                <InputLabel>{label}</InputLabel>
-                <Select
-                    label={label}
-                    value={state}
-                    onChange={(event) =>
-                        handleChange(keyValue, event.target.value)
-                    }
-                >
-                    <MenuItem value={''}></MenuItem>
-                    <MenuItem value={'Unicamp'}>Unicamp</MenuItem>
-                    <MenuItem value={'Mactur'}>Mactur</MenuItem>
-                    <MenuItem value={'Itnerol'}>Itnerol</MenuItem>
-                </Select>
-            </FormControl>
-        </div>
+        <select
+            value={state}
+            onChange={(event) =>
+                handleChange(keyValue, index, event.target.value)
+            }
+            className={styles.select}
+        >
+            <option value=""></option>
+            {list.map((empresa, index) => (
+                <option value={empresa.id} key={index}>
+                    {empresa.nome}
+                </option>
+            ))}
+        </select>
     )
 }
 

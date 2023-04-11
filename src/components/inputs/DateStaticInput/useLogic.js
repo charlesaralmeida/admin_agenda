@@ -1,15 +1,8 @@
-import { compareDate } from '../../../utils'
+import { compareDate } from 'utils'
 import { PickersDay } from '@mui/x-date-pickers'
 import styles from './.module.css'
 
-const useLogic = (
-    greenDays,
-    redDays,
-    yellowDays,
-    state,
-    handleChange,
-    keyValue
-) => {
+const useLogic = (greenDays, redDays, state, handleChange, keyValue) => {
     const selected = state
     const isSelected = (day) => (compareDate(day, selected) ? true : false)
 
@@ -25,7 +18,6 @@ const useLogic = (
 
     const renderDay = (day, currentMonth) => {
         let classStyle = ''
-        if (getMarkedDays(day, yellowDays)) classStyle = styles.yellow
         if (getMarkedDays(day, redDays)) classStyle = styles.red
         if (getMarkedDays(day, greenDays)) classStyle = styles.green
 

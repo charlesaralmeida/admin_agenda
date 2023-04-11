@@ -12,14 +12,12 @@ const DateStaticInput = ({
     state,
     greenDays,
     redDays,
-    yellowDays,
     currentMonth,
     handleChange,
 }) => {
     const { renderDay } = useLogic(
         greenDays,
         redDays,
-        yellowDays,
         state,
         handleChange,
         keyValue

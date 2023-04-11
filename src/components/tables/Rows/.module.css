@@ -4,13 +4,16 @@
     width: 100%;
 }
 
-.row {
+.row_odd {
+    background-color: rgba(0, 2, 65, 0.087);
     text-align: center;
     width: 100%;
 }
 
-.row:nth-child(odd) {
-    background-color: rgba(0, 2, 65, 0.087);
+.row_even {
+    background-color: white;
+    text-align: center;
+    width: 100%;
 }
 
 .data {
@@ -20,7 +23,7 @@
     padding: 1%;
 }
 
-.row:nth-child(odd) > .data {
+.row_odd > .data {
     border-right: 1px solid white;
 }
 
@@ -50,4 +53,12 @@
 
 .data:nth-child(7) {
     width: 17%;
+}
+
+.data_empresa_odd {
+    border-top: 1px solid white;
+}
+
+.data_empresa_even {
+    border-top: 1px solid var(--THIN_BORDER);
 }

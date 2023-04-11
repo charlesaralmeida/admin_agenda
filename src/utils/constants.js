@@ -1,3 +1,7 @@
+export const EMPRESAS = {
+    UNICAMP: 1,
+}
+
 export const COLORS = {
     PRIMARY: '#002C52',
     SECONDARY: '#002c5233',

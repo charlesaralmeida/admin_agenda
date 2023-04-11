@@ -9,7 +9,6 @@ const LeftContainer = () => {
         data_selecionada,
         greenDays,
         redDays,
-        yellowDays,
         currentMonth,
         lista_servicos,
         servico_selecionado,
@@ -23,7 +22,6 @@ const LeftContainer = () => {
                 keyValue={'data'}
                 greenDays={greenDays}
                 redDays={redDays}
-                yellowDays={yellowDays}
                 currentMonth={currentMonth}
             />
             <ServicoSelect

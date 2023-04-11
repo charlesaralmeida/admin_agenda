@@ -5,6 +5,7 @@ import {
     getDadosDataAtual,
     getFrotasSelecionadas,
     getMotoristasSelecionados,
+    getEmpresasSelecionadas,
     getServicoSelecionado,
 } from 'redux/slices/admin'
 
@@ -23,6 +24,7 @@ const useLogic = () => {
     const dados_data_atual = useSelector(getDadosDataAtual)
     const lista_motoristas = getListas().motoristas
     const lista_veiculos = getListas().veiculos
+    const lista_empresas = getListas().empresas
     const servico_selecionado = useSelector(getServicoSelecionado)
 
     const dispatch = useDispatch()
@@ -37,6 +39,10 @@ const useLogic = () => {
 
     const [motoristas_selecionados, setMotoristasSelecionados] = useState(
         useSelector(getMotoristasSelecionados)
+    )
+
+    const [empresas_selecionadas, setEmpresasSelecionadas] = useState(
+        useSelector(getEmpresasSelecionadas)
     )
 
     useEffect(() => {
@@ -59,6 +65,15 @@ const useLogic = () => {
                         : ''
         })
         setMotoristasSelecionados(motoristas)
+
+        let empresas = dados_data_atual.map((dado) => {
+            if (dado.veiculo_motorista)
+                if (dado.veiculo_motorista.empresa_id)
+                    return dado.veiculo_motorista.empresa_id
+                        ? dado.veiculo_motorista.empresa_id
+                        : ''
+        })
+        setEmpresasSelecionadas(empresas)
     }, [dados_data_atual, servico_selecionado])
 
     const getDados = () =>
@@ -153,6 +168,12 @@ const useLogic = () => {
             aux[key] = parseInt(value)
             setMotoristasSelecionados(aux)
         }
+
+        if (field === 'empresa') {
+            let aux = [...empresas_selecionadas]
+            aux[key] = parseInt(value)
+            setEmpresasSelecionadas(aux)
+        }
     }
 
     const dados = getDados()
@@ -166,8 +187,10 @@ const useLogic = () => {
         dados,
         frotas_selecionadas,
         motoristas_selecionados,
+        empresas_selecionadas,
         lista_motoristas,
         lista_veiculos,
+        lista_empresas,
     }
 }
 
